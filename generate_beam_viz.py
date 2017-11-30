@@ -92,7 +92,7 @@ def main():
   beam_data = json.load(open(ARGS.data, 'r'))
 
   # Optionally load vocabulary data
-  vocab = None
+  vocab = beam_data['vocab']
 
   if not os.path.exists(ARGS.output_dir):
     os.makedirs(ARGS.output_dir)
