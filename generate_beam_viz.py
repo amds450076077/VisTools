@@ -79,7 +79,7 @@ def _add_graph_level(graph, level, parent_ids, names, scores):
 
 def create_graph(predicted_ids, parent_ids, scores, vocab=None):
   def get_node_name(pred):
-    return vocab[pred] if vocab else pred
+    return vocab[str(pred)] if vocab else pred
 
   seq_length = len(predicted_ids) #.shape[0]
   graph = nx.DiGraph()
@@ -95,6 +95,7 @@ def main():
 
   # Optionally load vocabulary data
   vocab = beam_data['vocab']
+  vocab['0'] = '<EOS>'
   # vocab = None
 
   if not os.path.exists(ARGS.output_dir):
