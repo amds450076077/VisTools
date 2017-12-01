@@ -131,7 +131,7 @@ def main():
         ensure_ascii=True)
 
 
-    img_path = "../test_imgs/"+image_id+".png"
+    img_path = "../test_imgs/"+image_id+".jpg"
     html_str = HTML_TEMPLATE.substitute(DATA=json_str,SENT=sent,IMG_SRC=img_path)
     output_path = os.path.join(ARGS.output_dir, "{:06d}.html".format(idx))
     with open(output_path, "w") as file:
