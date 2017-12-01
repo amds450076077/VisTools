@@ -137,7 +137,7 @@ def main():
     url_prev = "{:06d}.html".format((idx - 1 + len_ids) % len_ids)
     url_next = "{:06d}.html".format((idx + 1)%len_ids)
 
-    img_path = "../test_imgs/"+image_id+".jpg"
+    img_path = "../testb_imgs/"+image_id+".jpg"
     html_str = HTML_TEMPLATE.substitute(DATA=json_str,SENT=sent,IMG_SRC=img_path,URL_PREV=url_prev,URL_NEXT=url_next)
     output_path = os.path.join(ARGS.output_dir, "{:06d}.html".format(idx))
     with open(output_path, "w") as file:
