@@ -60,9 +60,9 @@ HTML_TEMPLATE = Template("""
     <script src="http://d3js.org/d3.v3.min.js"></script>
   </head>
   <body>
+    <img src="$IMG_SRC" width='400px'/>
+    <h3>$SENT</h3>
     <script>
-      <img src="$IMG_SRC" width='400px'/>
-      <h3>$SENT</h3>
       var treeData = $DATA
     </script>
     <script src="tree.js"></script>
