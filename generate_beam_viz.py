@@ -54,6 +54,8 @@ HTML_TEMPLATE = Template("""
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <a href="$URL_PREV">上一页</a>
+    <a href="$URL_NEXT">下一页</a>
     <meta charset="utf-8">
     <title>Beam Search</title>
     <link rel="stylesheet" type="text/css" href="tree.css">
@@ -113,6 +115,7 @@ def main():
   shutil.copy2(path_base+"/beam_search_viz/tree.css", ARGS.output_dir)
   shutil.copy2(path_base+"/beam_search_viz/tree.js", ARGS.output_dir)
 
+  len_ids = len(beam_data["predicted_ids"])
   for idx in range(len(beam_data["predicted_ids"])):
     predicted_ids = beam_data["predicted_ids"][idx]
     parent_ids = beam_data["beam_parent_ids"][idx]
@@ -131,8 +134,11 @@ def main():
         ensure_ascii=True)
 
 
+    url_prev = "{:06d}.html".format((idx - 1 + len_ids) % len_ids)
+    url_next = "{:06d}.html".format((idx + 1)%len_ids)
+
     img_path = "../test_imgs/"+image_id+".jpg"
-    html_str = HTML_TEMPLATE.substitute(DATA=json_str,SENT=sent,IMG_SRC=img_path)
+    html_str = HTML_TEMPLATE.substitute(DATA=json_str,SENT=sent,IMG_SRC=img_path,URL_PREV=url_prev,URL_NEXT=url_next)
     output_path = os.path.join(ARGS.output_dir, "{:06d}.html".format(idx))
     with open(output_path, "w") as file:
       file.write(html_str)
