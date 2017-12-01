@@ -55,6 +55,8 @@ HTML_TEMPLATE = Template("""
   </head>
   <body>
     <script>
+      <img src="$IMG_SRC" width='400px'/>
+      <h3>$SENT</h3>
       var treeData = $DATA
     </script>
     <script src="tree.js"></script>
@@ -93,6 +95,7 @@ def main():
 
   # Optionally load vocabulary data
   vocab = beam_data['vocab']
+  # vocab = None
 
   if not os.path.exists(ARGS.output_dir):
     os.makedirs(ARGS.output_dir)
@@ -107,6 +110,8 @@ def main():
     predicted_ids = beam_data["predicted_ids"][idx]
     parent_ids = beam_data["beam_parent_ids"][idx]
     scores = beam_data["scores"][idx]
+    image_id = beam_data["ids"][idx]
+    sent = beam_data["sents"][idx]
 
     graph = create_graph(
         predicted_ids=predicted_ids,
@@ -118,7 +123,9 @@ def main():
         json_graph.tree_data(graph, (0, 0)),
         ensure_ascii=True)
 
-    html_str = HTML_TEMPLATE.substitute(DATA=json_str)
+
+    img_path = "../test_imgs/"+image_id+".png"
+    html_str = HTML_TEMPLATE.substitute(DATA=json_str,SENT=sent,IMG_SRC=img_path)
     output_path = os.path.join(ARGS.output_dir, "{:06d}.html".format(idx))
     with open(output_path, "w") as file:
       file.write(html_str)
