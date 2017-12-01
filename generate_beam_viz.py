@@ -54,14 +54,14 @@ HTML_TEMPLATE = Template("""
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <a href="$URL_PREV">上一页</a>
-    <a href="$URL_NEXT">下一页</a>
     <meta charset="utf-8">
     <title>Beam Search</title>
     <link rel="stylesheet" type="text/css" href="tree.css">
     <script src="http://d3js.org/d3.v3.min.js"></script>
   </head>
   <body>
+    <a href="$URL_PREV">PREV</a>
+    <a href="$URL_NEXT">NEXT</a>
     <img src="$IMG_SRC" width='400px'/>
     <h3>$SENT</h3>
     <script>
